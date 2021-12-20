@@ -1,6 +1,9 @@
 # Cloud9
 .c9
 
+# Terraform Lock file
+.terraform.lock.hcl
+
 # Local .terraform directories
 **/.terraform/*
 
