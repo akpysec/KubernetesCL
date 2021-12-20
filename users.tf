@@ -1,43 +1,25 @@
-# Group "developers"
-resource "aws_iam_group" "developers" {
-  name = "developers"
+# Users
+resource "aws_iam_user" "mysql_users" {
+  count = length(var.user_list)
+  name  = element(var.user_list, count.index)
 }
 
-# Policy attached to a group "developers"
-resource "aws_iam_group_policy" "my_developer_policy" {
-  name  = "my_developer_policy"
-  group = aws_iam_group.developers.name
-
-  # Terraform's "jsonencode" function converts a
-  # Terraform expression result to valid JSON syntax.
-  policy = jsonencode({
-   "Version":"2012-10-17",
-   "Statement":[
-      {
-         "Sid":"AllowRDSDescribe",
-         "Effect":"Allow",
-         "Action":"rds:Describe*",
-         "Resource":"*"
-      }
-   ]
-})
+resource "aws_iam_user_policy_attachment" "mysql_users_policy" {
+  count      = length(var.user_list)
+  user       = element(aws_iam_user.mysql_users.*.name, count.index)
+  policy_arn = aws_iam_policy.policy_mysql_users.arn
 }
 
-# User "developer"
-resource "aws_iam_user" "developer" {
-  name = "developer"
+resource "aws_iam_policy" "policy_mysql_users" {
+  name   = "ec2-read-only"
+  policy = data.aws_iam_policy_document.policy_json.json
+}
 
-  tags = {
-    tag-key = "tag-value"
+data "aws_iam_policy_document" "policy_json" {
+  statement {
+    actions = [
+    "rds:Describe*"]
+    resources = [
+    "*"]
   }
-}
-
-# User attached to group "developers"
-resource "aws_iam_user_group_membership" "developer_to_group" {
-  user = aws_iam_user.developer.name
-
-  groups = [
-    aws_iam_group.developers.name,
-    aws_iam_group.developers.name,
-  ]
 }

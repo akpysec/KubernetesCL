@@ -33,3 +33,13 @@ variable "sunny_cluster_name" {
   type    = string
   default = "sunny-eks"
 }
+
+variable "user_list" {
+  type    = list(string)
+  default = ["Omri", "Oran", "Andrey", "Liat"]
+}
+
+variable "db_list" {
+  type    = list(string)
+  default = ["prod", "test", "stage", "dev"]
+}

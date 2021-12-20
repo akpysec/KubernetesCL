@@ -13,6 +13,11 @@ resource "aws_db_instance" "sunny_db" {
 
 }
 
+# resource "mysql_database" "app" {
+#   count = length(var.db_list)
+#   name  = element(var.db_list, count.index)
+# }
+
 resource "aws_db_subnet_group" "db_subnet_group" {
   name       = "db-subnet-group"
   subnet_ids = aws_subnet.rds_subnet_.*.id
