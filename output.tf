@@ -49,13 +49,3 @@ output "config_map_aws_auth" {
 output "kubeconfig" {
   value = local.kubeconfig
 }
-
-output "mysql_users_access_key_id" {
-  value     = aws_iam_access_key.my_sql_users_access_keys[*].id
-  sensitive = true
-}
-
-output "mysql_users_access_secret_keys" {
-  value     = aws_iam_access_key.my_sql_users_access_keys[*].secret
-  sensitive = true
-}
