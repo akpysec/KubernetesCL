@@ -49,3 +49,7 @@ output "config_map_aws_auth" {
 output "kubeconfig" {
   value = local.kubeconfig
 }
+
+# variable "kubeconfig_file" {
+#   value = local.kubeconfig
+# }
