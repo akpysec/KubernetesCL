@@ -11,7 +11,7 @@ resource "aws_iam_user_policy_attachment" "mysql_users_policy" {
 }
 
 resource "aws_iam_policy" "policy_mysql_users" {
-  name   = "ec2-read-only"
+  name   = "rds-select-statement-only"
   policy = data.aws_iam_policy_document.policy_json.json
 }
 

@@ -1,0 +1,12 @@
+{
+    "Statement": [
+        {
+            "Action": "rds-data:ExecuteStatement/select*",
+            "Effect": "Allow",
+            "Resource": "*",
+            "Sid": ""
+        }
+    ],
+    "Version": "2012-10-17"
+}
+
