@@ -10,7 +10,10 @@ resource "aws_db_instance" "sunny_db" {
   username               = "sun_admin"
   password               = data.aws_ssm_parameter.rds_password.value
   vpc_security_group_ids = [aws_security_group.db_sg.id]
-
+  tags = {
+    Name  = var.db_tags[0]
+    Owner = var.db_tags[1]
+  }
 }
 
 # resource "mysql_database" "app" {
