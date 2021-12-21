@@ -24,11 +24,6 @@ variable "eks_tags" {
   default = ["SUNNY-K8s", "AKpySec"]
 }
 
-variable "sg_tags" {
-  type    = list(string)
-  default = ["SUNNY-DB-SG", "AKpySec"]
-}
-
 variable "sunny_cluster_name" {
   type    = string
   default = "sunny-eks"
@@ -39,6 +34,7 @@ variable "user_list" {
   default = ["Omri", "Oran", "Andrey", "Liat"]
 }
 
+# Un-used
 variable "db_list" {
   type    = list(string)
   default = ["prod", "test", "stage", "dev"]

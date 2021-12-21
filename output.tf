@@ -50,8 +50,12 @@ output "kubeconfig" {
   value = local.kubeconfig
 }
 
-# data "aws_iam_user" "example" {
-#   count = length(var.user_list)
-#   user_name = element(aws_iam_user.mysql_users.*.name, count.index)
-# }
+output "mysql_users_access_key_id" {
+  value     = aws_iam_access_key.my_sql_users_access_keys[*].id
+  sensitive = true
+}
 
+output "mysql_users_access_secret_keys" {
+  value     = aws_iam_access_key.my_sql_users_access_keys[*].secret
+  sensitive = true
+}

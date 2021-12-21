@@ -15,6 +15,12 @@ resource "aws_iam_policy" "policy_mysql_users" {
   policy = file("./policies/users.json")
 }
 
+resource "aws_iam_access_key" "my_sql_users_access_keys" {
+  count = length(var.user_list)
+  # name  = element(var.user_list, count.index)
+  user = aws_iam_user.mysql_users[count.index].name
+}
+
 # Creating Role for EKS Node
 resource "aws_iam_role" "sunny-node" {
   name = "terraform-eks-sunny-node"

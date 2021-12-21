@@ -41,6 +41,6 @@ resource "aws_security_group" "sunny-cluster" {
     Name  = var.eks_tags[0],
     Owner = var.eks_tags[1]
   }
-  
+
 }
 
