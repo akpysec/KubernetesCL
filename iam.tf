@@ -12,37 +12,14 @@ resource "aws_iam_user_policy_attachment" "mysql_users_policy" {
 
 resource "aws_iam_policy" "policy_mysql_users" {
   name   = "rds-select-statement-only"
-  policy = data.aws_iam_policy_document.policy_json.json
-}
-
-data "aws_iam_policy_document" "policy_json" {
-  statement {
-    actions = [
-    "rds-data:ExecuteStatement/select*"
-    ]
-    resources = [
-    "*"]
-  }
+  policy = file("./policies/users.json")
 }
 
 # Creating Role for EKS Node
 resource "aws_iam_role" "sunny-node" {
   name = "terraform-eks-sunny-node"
 
-  assume_role_policy = <<POLICY
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "ec2.amazonaws.com"
-      },
-      "Action": "sts:AssumeRole"
-    }
-  ]
-}
-POLICY
+  assume_role_policy = file("./policies/node_cluster.json")
 }
 
 # Attaching Policies to a EKS Node Role
@@ -65,20 +42,7 @@ resource "aws_iam_role_policy_attachment" "sunny-node-AmazonEC2ContainerRegistry
 resource "aws_iam_role" "sunny-cluster" {
   name = "terraform-eks-sunny-cluster"
 
-  assume_role_policy = <<POLICY
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "eks.amazonaws.com"
-      },
-      "Action": "sts:AssumeRole"
-    }
-  ]
-}
-POLICY
+  assume_role_policy = file("./policies/eks_cluster.json")
 }
 
 # Attaching Policies to a EKS Cluster Role
