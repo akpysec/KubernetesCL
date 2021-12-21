@@ -1,22 +1,3 @@
-# Security Group allowing communication with worker node
-resource "aws_security_group" "sunny-cluster" {
-  name        = "terraform-eks-sunny-cluster"
-  description = "Cluster communication with worker nodes"
-  vpc_id      = aws_vpc.sunny_vpc.id
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name  = var.sunny_cluster_name
-    Owner = var.vpc_tags[1]
-  }
-}
-
 # Ingress rules SG group
 resource "aws_security_group_rule" "sunny-cluster-ingress-workstation-https" {
   cidr_blocks       = [local.workstation-external-cidr]
