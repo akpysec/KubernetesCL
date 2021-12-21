@@ -32,7 +32,7 @@ resource "aws_subnet" "sunny" {
   vpc_id                  = aws_vpc.sunny_vpc.id
 
   tags = {
-    Name  = var.sunny_cluster_name
+    Name  = var.eks_tags[0]
     Owner = var.eks_tags[1]
 
   }
@@ -42,7 +42,8 @@ resource "aws_internet_gateway" "sunny" {
   vpc_id = aws_vpc.sunny_vpc.id
 
   tags = {
-    Name = "terraform-eks-sunny"
+    Name  = var.eks_tags[0],
+    Owner = var.eks_tags[1]
   }
 }
 
@@ -52,6 +53,10 @@ resource "aws_route_table" "sunny" {
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.sunny.id
+  }
+  tags = {
+    Name  = var.eks_tags[0],
+    Owner = var.eks_tags[1]
   }
 }
 

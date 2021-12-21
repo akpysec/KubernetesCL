@@ -49,3 +49,9 @@ output "config_map_aws_auth" {
 output "kubeconfig" {
   value = local.kubeconfig
 }
+
+# data "aws_iam_user" "example" {
+#   count = length(var.user_list)
+#   user_name = element(aws_iam_user.mysql_users.*.name, count.index)
+# }
+
