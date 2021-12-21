@@ -16,4 +16,8 @@ resource "aws_eks_node_group" "sunny" {
     aws_iam_role_policy_attachment.sunny-node-AmazonEKS_CNI_Policy,
     aws_iam_role_policy_attachment.sunny-node-AmazonEC2ContainerRegistryReadOnly,
   ]
+  tags = {
+    Name  = var.eks_tags[0],
+    Owner = var.eks_tags[1]
+  }
 }

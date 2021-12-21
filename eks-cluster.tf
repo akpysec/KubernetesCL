@@ -23,6 +23,10 @@ resource "aws_eks_cluster" "sunny" {
     aws_iam_role_policy_attachment.sunny-cluster-AmazonEKSClusterPolicy,
     aws_iam_role_policy_attachment.sunny-cluster-AmazonEKSVPCResourceController,
   ]
+  tags = {
+    Name  = var.eks_tags[0],
+    Owner = var.eks_tags[1]
+  }
 }
 
 # Override with variable or hardcoded value if necessary

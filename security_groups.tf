@@ -19,8 +19,8 @@ resource "aws_security_group" "db_sg" {
   }
 
   tags = {
-    Name  = var.sg_tags[0]
-    Owner = var.sg_tags[1]
+    Name  = var.db_tags[0]
+    Owner = var.db_tags[1]
   }
 }
 
@@ -38,8 +38,9 @@ resource "aws_security_group" "sunny-cluster" {
   }
 
   tags = {
-    Name  = var.sunny_cluster_name
-    Owner = var.vpc_tags[1]
+    Name  = var.eks_tags[0],
+    Owner = var.eks_tags[1]
   }
+  
 }
 
