@@ -18,7 +18,7 @@ resource "aws_iam_policy" "policy_mysql_users" {
 data "aws_iam_policy_document" "policy_json" {
   statement {
     actions = [
-    "rds:Describe*"]
+    "rds-data:ExecuteStatement"]
     resources = [
     "*"]
   }
