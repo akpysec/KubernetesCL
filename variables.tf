@@ -9,7 +9,7 @@ variable "vpc_cidr" {
 }
 
 variable "subnet_cidrs" {
-  default     = ["10.0.100.0/24", "10.0.101.0/24"]
+  default     = ["10.0.100.0/24", "10.0.101.0/24", "10.0.200.0/24", "10.0.201.0/24"]
   type        = list(string)
   description = "DB & K8s Subnets"
 }
