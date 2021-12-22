@@ -50,6 +50,3 @@ output "kubeconfig" {
   value = local.kubeconfig
 }
 
-# variable "kubeconfig_file" {
-#   value = local.kubeconfig
-# }
