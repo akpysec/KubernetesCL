@@ -13,6 +13,18 @@ kubectl cluster-info
 kubectl get nodes
 # Pull docker
 docker pull akpysec/ubuntu-mysql-cli
+
+# Set up kubectl and IAM authenticator
+# IAM Athenticator https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html
+# Kubectl https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html
+
+# copy terraform kubeconfig output (remove leading <<CUBECONFIG and <<EOF lines)
+touch /home/ec2-user/.kube/config
+terraform output kubeconfig > /home/ec2-user/.kube/config
+
+# Check EKS version
+eksctl version
+
 # Creating App
 kubectl create deployment mysql-cli --image=akpysec/ubuntu-mysql-cli
 # View Deployment and running Pods
