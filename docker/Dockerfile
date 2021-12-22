@@ -1,3 +1,3 @@
-FROM ubuntu:20.04
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends mysql-client
+FROM amazonlinux:2
+RUN yum install -y mariadb
+ENTRYPOINT ["mysql"]

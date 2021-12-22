@@ -17,7 +17,7 @@ resource "aws_iam_policy" "policy_mysql_users" {
 
 resource "aws_iam_access_key" "my_sql_users_access_keys" {
   count = length(var.user_list)
-  user = aws_iam_user.mysql_users[count.index].name
+  user  = aws_iam_user.mysql_users[count.index].name
 }
 
 # Creating Role for EKS Node
