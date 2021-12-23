@@ -16,7 +16,7 @@ variable "subnet_cidrs" {
 
 variable "db_tags" {
   type    = list(string)
-  default = ["SUNNY-DB", "AKpySec"]
+  default = ["SUNNY-DB", "AKpySec", "sunny-mysql"]
 }
 
 variable "eks_tags" {
@@ -31,10 +31,9 @@ variable "sunny_cluster_name" {
 
 variable "user_list" {
   type    = list(string)
-  default = ["Omri", "Oran", "Andrey", "Liat"]
+  default = ["Omri", "Oran", "Shay", "Igor", "Andrey", "Liat"]
 }
 
-# Un-used
 variable "db_list" {
   type    = list(string)
   default = ["prod", "test", "stage", "dev"]

@@ -50,3 +50,6 @@ output "kubeconfig" {
   value = local.kubeconfig
 }
 
+output "db_endpoint" {
+  value = data.aws_db_instance.sunny_db.address
+}

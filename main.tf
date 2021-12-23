@@ -5,16 +5,22 @@ provider "aws" {
   profile                 = "default"
 }
 
-# Configure the MySQL provider based on the outcome of
-# creating the aws_db_instance.
-##### Error #####
-# provider "mysql" {
-#   endpoint = aws_db_instance.sunny_db.endpoint
-#   username = aws_db_instance.sunny_db.username
-#   password = aws_db_instance.sunny_db.password
-# }
+provider "mysql" {
+  endpoint = "${aws_db_instance.sunny_db.endpoint}"
+  username = "${aws_db_instance.sunny_db.username}"
+  password = "${data.aws_ssm_parameter.rds_password.value}"
+}
 
 provider "http" {}
+
+terraform {
+  required_providers {
+    mysql = {
+      source = "winebarrel/mysql"
+      version = "1.10.6"
+    }
+  }
+}
 
 terraform {
   backend "s3" {

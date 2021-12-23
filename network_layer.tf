@@ -11,6 +11,7 @@ resource "aws_vpc" "sunny_vpc" {
 # Creating RDS SUBNETS in a -> SunnyVPC (AZ-1-2) ^
 resource "aws_subnet" "rds_subnet_" {
   count             = 2
+  
   vpc_id            = aws_vpc.sunny_vpc.id
   cidr_block        = var.subnet_cidrs[count.index]
   availability_zone = data.aws_availability_zones.available.names[count.index]
@@ -62,7 +63,7 @@ resource "aws_route_table" "sunny" {
 
 resource "aws_route_table_association" "sunny" {
   count = 2
-
+  
   subnet_id      = aws_subnet.sunny.*.id[count.index]
   route_table_id = aws_route_table.sunny.id
 }

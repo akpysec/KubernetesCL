@@ -1,4 +1,5 @@
-################### Create Process ######################################
+################### Create Docker Image & Push to Public Repository ######################################
+
 # Login to your account (Provide user & token)
 docker login
 # Build docker from Dockerfile
@@ -7,27 +8,23 @@ docker build -t ubuntu-mysql-client .
 # docker tag akpysec/mysql-client akpysec/mysql-client:latest
 docker push akpysec/ubuntu-mysql-cli
 
-################### Running in the EKS Cluster ###########################
-# Check Cluster Information
-kubectl cluster-info
-# View running Nodes
-kubectl get nodes
-# Pull docker
-docker pull akpysec/ubuntu-mysql-cli
+############################### Running in the EKS Cluster ###############################################
 
+# Prerequisites:
 # Set up kubectl and IAM authenticator
 # IAM Athenticator https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html
 # Kubectl https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html
+
+# Check Kubernetes version
+kubectl version
+
+# Check Cluster Information
+kubectl cluster-info
 
 # copy terraform kubeconfig output to kubeconfig
 touch /home/ec2-user/.kube/config
 terraform output kubeconfig | tail -n +2 | head -c -5 > /home/ec2-user/.kube/config
 
-# Check EKS version
-eksctl version
+# Connecting to MySQL DB
+kubectl run -it --rm --image=akpysec/ubuntu-mysql-cli:latest --restart=Never mysql-client -- mysql --host=<specify_db_endpoint> --user=<specify_username> --password=<spicify_password>
 
-# Creating App
-kubectl create deployment mysql-cli --image=akpysec/ubuntu-mysql-cli
-# View Deployment and running Pods
-kubectl get deployment -o wide
-kubectl get pods -o wide
