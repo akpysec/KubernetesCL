@@ -73,3 +73,9 @@ Connecting to MySQL DB through EKS-Docker that Downloaded from my Repo at Docker
     
         kubectl run -it --rm --image=akpysec/ubuntu-mysql-cli:latest --restart=Never mysql-client -- mysql --host="<specify_db_endpoint>" --user="<specify_username>" --password="<spicify_password>"
 
+#### View Users Priveledges
+
+    SELECT CONCAT('SHOW GRANTS FOR \'',user,'\'@\'',host,'\';') FROM mysql.user;
+
+Then select presented commands for checkup as such:
+    
