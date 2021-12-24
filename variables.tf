@@ -8,10 +8,16 @@ variable "vpc_cidr" {
   type    = string
 }
 
-variable "subnet_cidrs" {
-  default     = ["172.16.100.0/24", "172.16.101.0/24", "172.16.200.0/24", "172.16.201.0/24"]
+variable "db_subnet_cidrs" {
+  default     = ["172.16.100.0/24", "172.16.101.0/24"]
   type        = list(string)
-  description = "DB & K8s Subnets"
+  description = "DB Subnets"
+}
+
+variable "eks_subnet_cidrs" {
+  default     = ["172.16.200.0/24", "172.16.201.0/24"]
+  type        = list(string)
+  description = "K8s Subnets"
 }
 
 variable "db_tags" {
@@ -31,12 +37,12 @@ variable "sunny_cluster_name" {
 
 variable "user_list" {
   type    = list(string)
-  default = ["Omri", "Oran", "Shay", "Igor", "Andrey", "Liat"]
+  default = ["Omri", "Oran", "Shay", "Igor"]
 }
 
 variable "db_list" {
   type    = list(string)
-  default = ["prod", "test", "stage", "dev"]
+  default = ["Prod", "Test", "Stage", "Dev"]
 }
 
 variable "cloud9_vpc_id" {
@@ -49,7 +55,3 @@ variable "cloud9_subnet" {
   default = "10.0.0.0/24"
 }
 
-variable "cloud9_vpc_cidr" {
-  type    = string
-  default = "10.0.0.0/16"
-}

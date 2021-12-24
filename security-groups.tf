@@ -8,7 +8,7 @@ resource "aws_security_group" "db_sg" {
     from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
-    cidr_blocks = [var.subnet_cidrs[2], var.subnet_cidrs[3], var.cloud9_subnet]
+    cidr_blocks = [var.eks_subnet_cidrs[0], var.eks_subnet_cidrs[1], var.cloud9_subnet]
   }
 
   egress {

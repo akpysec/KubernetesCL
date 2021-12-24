@@ -8,7 +8,7 @@ provider "aws" {
 provider "mysql" {
   endpoint = aws_db_instance.sunny_db.endpoint
   username = aws_db_instance.sunny_db.username
-  password = data.aws_ssm_parameter.rds_password.value
+  password = data.aws_ssm_parameter.rds_master_password.value
 }
 
 provider "http" {}
@@ -29,4 +29,3 @@ terraform {
     region = "us-east-1"
   }
 }
-

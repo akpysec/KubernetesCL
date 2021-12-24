@@ -1,15 +1,16 @@
-# Get Password from SSM Parameter Store
-data "aws_ssm_parameter" "rds_password" {
-  name       = "/sunny_db/mysql"
-  depends_on = [aws_ssm_parameter.rds_password]
+# Get Master Password from SSM Parameter Store 
+data "aws_ssm_parameter" "rds_master_password" {
+  name       = "/sunny_db/mysql_master"
+  depends_on = [aws_ssm_parameter.rds_master_password]
 }
 
+# Get Users Passwords from SSM Parameter Store 
 data "aws_ssm_parameter" "rds_users_passwords" {
-  count = length(var.user_list)
-  name  = "/sunny_db/${element(var.user_list, count.index)}"
-  # name       = "/sunny_db/mysql"
+  count      = length(var.user_list)
+  name       = "/sunny_db/${element(var.user_list, count.index)}"
   depends_on = [aws_ssm_parameter.rds_users_passwords]
 }
+
 # Getting availability zones list
 data "aws_availability_zones" "available" {}
 
