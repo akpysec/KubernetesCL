@@ -49,6 +49,4 @@ resource "mysql_grant" "mysql_users_permissions" {
   host       = mysql_user.mysql_users[count.index].host
   database   = "*"
   privileges = ["SELECT"]
-
-  # depends_on = [mysql_user.mysql_users]
 }
