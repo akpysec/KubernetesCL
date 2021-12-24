@@ -65,17 +65,25 @@ We have to create ./kube directory and config file in it, afterwards append a ku
     touch /home/ec2-user/.kube/config
     terraform output kubeconfig | tail -n +2 | head -c -5 > /home/ec2-user/.kube/config
 
-### Final POC command
-Connecting to MySQL DB through EKS-Docker that Downloaded from my Repo at Dockerhub
+## Final POC command
+
+Connecting to MySQL DB through EKS-Docker that Downloaded from my Repo at Dockerhub & checking for priveledges assigned.
+
+#### Connect to DB:
+
+![connection to DB](https://user-images.githubusercontent.com/48283299/147374428-df884aa7-17b8-4a4f-88f2-ac1423aaa1f0.PNG)
+
+Permissions:
+
+![Permissions View](https://user-images.githubusercontent.com/48283299/147374429-479a3dc7-3d14-4d8e-a038-5ee3809df2b2.PNG)
 
 - Getting Endpoint with "terraform output db_endpoint" command
 - Getting Password from SSM Parameter Store
-    
+      
+#### Commands:
+
         kubectl run -it --rm --image=akpysec/ubuntu-mysql-cli:latest --restart=Never mysql-client -- mysql --host="<specify_db_endpoint>" --user="<specify_username>" --password="<spicify_password>"
+        SELECT CONCAT('SHOW GRANTS FOR \'',user,'\'@\'',host,'\';') FROM mysql.user;
+        SHOW GRANTS FOR 'Username'@'db_endpoint / % / localhost';
 
-#### View Users Priveledges
-
-    SELECT CONCAT('SHOW GRANTS FOR \'',user,'\'@\'',host,'\';') FROM mysql.user;
-
-Then select presented commands for checkup as such:
-    
+#
