@@ -4,6 +4,12 @@ data "aws_ssm_parameter" "rds_password" {
   depends_on = [aws_ssm_parameter.rds_password]
 }
 
+data "aws_ssm_parameter" "rds_users_passwords" {
+  count = length(var.user_list)
+  name  = "/sunny_db/${element(var.user_list, count.index)}"
+  # name       = "/sunny_db/mysql"
+  depends_on = [aws_ssm_parameter.rds_users_passwords]
+}
 # Getting availability zones list
 data "aws_availability_zones" "available" {}
 
@@ -15,5 +21,5 @@ data "http" "workstation-external-ip" {
 
 data "aws_db_instance" "sunny_db" {
   db_instance_identifier = var.db_tags[2]
-  depends_on = [aws_db_instance.sunny_db]
+  depends_on             = [aws_db_instance.sunny_db]
 }

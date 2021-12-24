@@ -16,15 +16,16 @@ docker push akpysec/ubuntu-mysql-cli
 # Kubectl https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html
 
 # Check Kubernetes version
-kubectl version
+kubectl version --short --client
 
 # Check Cluster Information
 kubectl cluster-info
 
 # copy terraform kubeconfig output to kubeconfig
+mkdir /home/ec2-user/.kube
 touch /home/ec2-user/.kube/config
 terraform output kubeconfig | tail -n +2 | head -c -5 > /home/ec2-user/.kube/config
 
 # Connecting to MySQL DB
-kubectl run -it --rm --image=akpysec/ubuntu-mysql-cli:latest --restart=Never mysql-client -- mysql --host=<specify_db_endpoint> --user=<specify_username> --password=<spicify_password>
+kubectl run -it --rm --image=akpysec/ubuntu-mysql-cli:latest --restart=Never mysql-client -- mysql --host="<specify_db_endpoint>" --user="<specify_username>" --password="<spicify_password>"
 

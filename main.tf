@@ -6,9 +6,9 @@ provider "aws" {
 }
 
 provider "mysql" {
-  endpoint = "${aws_db_instance.sunny_db.endpoint}"
-  username = "${aws_db_instance.sunny_db.username}"
-  password = "${data.aws_ssm_parameter.rds_password.value}"
+  endpoint = aws_db_instance.sunny_db.endpoint
+  username = aws_db_instance.sunny_db.username
+  password = data.aws_ssm_parameter.rds_password.value
 }
 
 provider "http" {}
@@ -16,7 +16,7 @@ provider "http" {}
 terraform {
   required_providers {
     mysql = {
-      source = "winebarrel/mysql"
+      source  = "winebarrel/mysql"
       version = "1.10.6"
     }
   }

@@ -12,7 +12,6 @@ resource "aws_db_instance" "sunny_db" {
   iam_database_authentication_enabled = true
   vpc_security_group_ids              = [aws_security_group.db_sg.id]
   skip_final_snapshot                 = true
-
   tags = {
     Name  = var.db_tags[0]
     Owner = var.db_tags[1]
@@ -24,21 +23,25 @@ resource "aws_db_subnet_group" "db_subnet_group" {
   subnet_ids = aws_subnet.rds_subnet_.*.id
 }
 
-# # Creating Databases
-# resource "mysql_database" "app" {
-#   count = length(var.db_list)
-#   name  = element(var.db_list, count.index)
-# }
-
-# Every time the same error - Unresolved , yet
-# | 2021-12-23T19:22:26.585Z [ERROR] vertex "mysql_database.app" error: Could not connect to server: dial tcp 10.0.100.215:3306: connect: connection timed out
-# |
-# │ Error: Could not connect to server: dial tcp 10.0.100.215:3306: connect: connection timed out
-# │ 
-# │   with mysql_database.app,
-# │   on database.tf line 28, in resource "mysql_database" "app":
-# │   28: resource "mysql_database" "app" {
-# │ 
-# ╵
+# Creating Databases
+resource "mysql_database" "app" {
+  count = length(var.db_list)
+  name  = element(var.db_list, count.index)
+}
 
 
+resource "mysql_user" "mysql_users" {
+  count              = length(var.user_list)
+  user               = element(var.user_list, count.index)
+  host               = aws_db_instance.sunny_db.address
+  tls_option         = "SSL"
+  plaintext_password = data.aws_ssm_parameter.rds_users_passwords[count.index].value
+}
+
+resource "mysql_grant" "mysql_users_permissions" {
+  count      = length(var.user_list)
+  user       = element(var.user_list, count.index)
+  host       = mysql_user.mysql_users[count.index].host
+  database   = aws_db_instance.sunny_db.name
+  privileges = ["SELECT"]
+}
