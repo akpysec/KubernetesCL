@@ -50,7 +50,7 @@ after I resolved the connectivity issue with VPC Peering and routing between the
     - cloud9_subnet
     - cloud9_route_table_id
     
-5) Install 'IAM Authenticator & kubectl' on the Cloud9 Instance or another instance you are going to run your SQL statements from, just make sure to copy kubeconfig from terraform output to the prefered Instance. This configuration allows to your instance to communicate with AWS EKS Docker Container.
+5) Install 'IAM Authenticator & kubectl' on the Cloud9 Instance or another instance you are going to run your SQL queries from, just make sure to copy kubeconfig from terraform output to the prefered Instance. This configuration allows to your instance to communicate with AWS EKS Docker Container.
 
     - [IAM Athenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html) 
     - [Kubectl](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html)
@@ -76,7 +76,7 @@ after I resolved the connectivity issue with VPC Peering and routing between the
     **kubectl** commands:
 
         kubectl run -it --rm --image=akpysec/ubuntu-mysql-cli:latest --restart=Never mysql-client -- mysql --host="<specify_db_endpoint>" --user="<specify_username>" --password="<spicify_password>"
-    **MySQL** statements:
+    **MySQL** queries:
         
         // Users Permissions check
         SELECT CONCAT('SHOW GRANTS FOR \'',user,'\'@\'',host,'\';') FROM mysql.user;
