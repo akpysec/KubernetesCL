@@ -26,18 +26,18 @@ Note - Verify your code is running properly, this configuration should be effici
 
 ---
 
-## Notice:
+### Notice:
 Because I developed all infrastructure from Cloud9 (different VPC) I had trouble creating tables in a MySQL Instance,
 after I resolved the connectivity issue with VPC Peering and routing between the subnets, all worked fine 🎉
 
----
+#
 
 ### Prerequisites:
 
 
 - Build docker from [Dockerfile]("./docker/Dockerfile")
 
----
+#
 
 ### Summary
 
@@ -102,5 +102,8 @@ Permissions:
 
 
 ---
+
+### Contact
+Contact me via <akpysec@gmail.com>.
 
 #
