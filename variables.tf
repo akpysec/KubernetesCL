@@ -32,7 +32,7 @@ variable "eks_tags" {
 
 variable "sunny_cluster_name" {
   type    = string
-  default = "sunny-eks"
+  default = "SUNNY-EKS"
 }
 
 variable "user_list" {
@@ -45,9 +45,15 @@ variable "db_list" {
   default = ["Prod", "Test", "Stage", "Dev"]
 }
 
+# Update those variables to match your VPC
 variable "cloud9_vpc_id" {
   type    = string
   default = "vpc-06dec4bd7ac56d988"
+}
+
+variable "cloud9_subnet_id" {
+  type    = string
+  default = "subnet-05d406dfba4584345"
 }
 
 variable "cloud9_subnet" {
@@ -55,3 +61,12 @@ variable "cloud9_subnet" {
   default = "10.0.0.0/24"
 }
 
+variable "cloud9_route_table_id" {
+  type    = string
+  default = "rtb-0ea83e644aa7ab3d3"
+}
+
+variable "cloud9_ig" {
+  type    = string
+  default = "igw-0e5cfafe096420345"
+}

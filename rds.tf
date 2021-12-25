@@ -50,3 +50,14 @@ resource "mysql_grant" "mysql_users_permissions" {
   database   = "*"
   privileges = ["SELECT"]
 }
+
+
+# resource "mysql_user_password" "mysql_users_passwords" {
+#   count      = length(var.user_list)
+#   user    = mysql_user.mysql_users[count.index].user
+#   pgp_key = "keybase:${mysql_user.mysql_users[count.index].user}"
+# }
+
+# For tomorrow:
+# - Add passwords and check they are working
+# - Explain adding a right route
