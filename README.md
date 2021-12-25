@@ -92,10 +92,11 @@ Permissions:
 
 ### Summary
 1) Update 'variables.tf' with your VPC network & VPC ID if you as me use different VPC from where you run your terraform
-2) Install 'IAM Authenticator & kubectl'
-3) Update ./kube/config file with configuration exported from terraform (explained ^)
-4) Use one line command to connect to your MySQL through docker ^
-5) Check for Permissions
+    - Variables to update; cloud9_vpc_id, cloud9_subnet_id, cloud9_subnet
+3) Install 'IAM Authenticator & kubectl'
+4) Update ./kube/config file with configuration exported from terraform (explained ^)
+5) Use one line command to connect to your MySQL through docker ^
+6) Check for Permissions
 
 #
 
