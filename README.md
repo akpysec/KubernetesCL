@@ -97,9 +97,29 @@ Permissions:
 - Getting Password from SSM Parameter Store
       
 #### Commands:
+<<<<<<< HEAD
 
         kubectl run -it --rm --image=akpysec/ubuntu-mysql-cli:latest --restart=Never mysql-client -- mysql --host="<specify_db_endpoint>" --user="<specify_username>" --password="<spicify_password>"
         SELECT CONCAT('SHOW GRANTS FOR \'',user,'\'@\'',host,'\';') FROM mysql.user;
         SHOW GRANTS FOR 'Username'@'db_endpoint / % / localhost';
 
 ---
+=======
+
+        kubectl run -it --rm --image=akpysec/ubuntu-mysql-cli:latest --restart=Never mysql-client -- mysql --host="<specify_db_endpoint>" --user="<specify_username>" --password="<spicify_password>"
+        SELECT CONCAT('SHOW GRANTS FOR \'',user,'\'@\'',host,'\';') FROM mysql.user;
+        SHOW GRANTS FOR 'Username'@'db_endpoint / % / localhost';
+
+---
+
+### Summary
+1) Update 'variables.tf' with your VPC network & VPC ID if you as me use different VPC from where you run your terraform
+    - Variables to update; *cloud9_vpc_id, cloud9_subnet_id, cloud9_subnet*
+3) Install 'IAM Authenticator & kubectl'
+4) Update ./kube/config file with configuration exported from terraform (explained ^)
+5) Use one line command to connect to your MySQL through docker ^
+6) Check for Permissions
+
+#
+
+>>>>>>> b92d912ea3c9a9dc0056f75e9cf68e363522928b
