@@ -56,7 +56,7 @@ Push created Container to my repository
     
     > Variables to update; **cloud9_vpc_id, cloud9_subnet_id, cloud9_subnet, cloud9_ig**
 
-3) Install 'IAM Authenticator & kubectl' [^1]
+3) Install 'IAM Authenticator & kubectl'
 4) Update ./kube/config file with configuration exported from terraform (explained ^)
 5) Use one line command to connect to your MySQL through docker ^
 6) Check for Permissions
@@ -64,7 +64,7 @@ Push created Container to my repository
 ---
 
 ### EKS Instructions
-[^1]: #### Install Prerequisites:
+#### Install Prerequisites:
 
 - [IAM Athenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html) 
 - [Kubectl](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html)
@@ -75,11 +75,10 @@ Create & copy terraform kubeconfig output to /.kube/kubeconfig file
 Instance Certificate Authentication with EKS needs a CA provided by the "terraform output kubeconfig" command (after terraform builds infrastructure).
 We have to create ./kube directory and config file in it, afterwards append a kubeconfig output with certificate and other configurations.
 - Take notice that the output returns 2 extra lines - first & last line <<EOT & EOT, 3-rd command takes care of it.
-
-
-    mkdir /home/ec2-user/.kube
-    touch /home/ec2-user/.kube/config
-    terraform output kubeconfig | tail -n +2 | head -c -5 > /home/ec2-user/.kube/config
+        
+        mkdir /home/ec2-user/.kube
+        touch /home/ec2-user/.kube/config
+        terraform output kubeconfig | tail -n +2 | head -c -5 > /home/ec2-user/.kube/config
 
 ## Final POC command
 
@@ -97,29 +96,9 @@ Permissions:
 - Getting Password from SSM Parameter Store
       
 #### Commands:
-<<<<<<< HEAD
 
         kubectl run -it --rm --image=akpysec/ubuntu-mysql-cli:latest --restart=Never mysql-client -- mysql --host="<specify_db_endpoint>" --user="<specify_username>" --password="<spicify_password>"
         SELECT CONCAT('SHOW GRANTS FOR \'',user,'\'@\'',host,'\';') FROM mysql.user;
         SHOW GRANTS FOR 'Username'@'db_endpoint / % / localhost';
-
----
-=======
-
-        kubectl run -it --rm --image=akpysec/ubuntu-mysql-cli:latest --restart=Never mysql-client -- mysql --host="<specify_db_endpoint>" --user="<specify_username>" --password="<spicify_password>"
-        SELECT CONCAT('SHOW GRANTS FOR \'',user,'\'@\'',host,'\';') FROM mysql.user;
-        SHOW GRANTS FOR 'Username'@'db_endpoint / % / localhost';
-
----
-
-### Summary
-1) Update 'variables.tf' with your VPC network & VPC ID if you as me use different VPC from where you run your terraform
-    - Variables to update; *cloud9_vpc_id, cloud9_subnet_id, cloud9_subnet*
-3) Install 'IAM Authenticator & kubectl'
-4) Update ./kube/config file with configuration exported from terraform (explained ^)
-5) Use one line command to connect to your MySQL through docker ^
-6) Check for Permissions
 
 #
-
->>>>>>> b92d912ea3c9a9dc0056f75e9cf68e363522928b
