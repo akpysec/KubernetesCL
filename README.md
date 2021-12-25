@@ -1,5 +1,5 @@
 
----
+#
 
 ## Sunny Interview assignment
 Made for interview purposes on AWS cloud infrastructure
@@ -103,7 +103,7 @@ Permissions:
 
 #
 
-### Contact
+### Contact:
 Contact me via <akpysec@gmail.com>.
 
 #
