@@ -1,4 +1,5 @@
-#
+
+---
 
 ## Sunny Interview assignment
 Made for interview purposes on AWS cloud infrastructure
@@ -29,58 +30,65 @@ Note - Verify your code is running properly, this configuration should be effici
 Because I developed all infrastructure from Cloud9 (different VPC) I had trouble creating tables in a MySQL Instance,
 after I resolved the connectivity issue with VPC Peering and routing between the subnets, all worked fine 🎉
 
+---
+
 ### Prerequisites:
 
-* Add Route within your Cloud9 VPC to a 172.16.0.0/16 CIDR (Where terraform infrastructure hosts).
-* In the variables.tf update Cloud9 networking subnets if needed (I used 10.0.0.0/24 in Cloud9 VPC).
 
-### Docker Commands used
-
-Login to your account (Provide user & token)
-    
-    docker login
-
-Build docker from [Dockerfile]("./docker/Dockerfile")
-    
-    docker build -t ubuntu-mysql-client .
-
-Push created Container to my repository
-    
-    docker tag akpysec/mysql-client akpysec/mysql-client:latest
-    docker push akpysec/ubuntu-mysql-cli
+- Build docker from [Dockerfile]("./docker/Dockerfile")
 
 ---
+
 ### Summary
 
-1) Update 'variables.tf' with your VPC network & VPC ID if you as me use different VPC from where you run your terraform
+1) Create Cloud9 Developer environment.
+2) Assignment Permissions to the role for EC2-Instance that runs Cloud9 IDE, so terraform would be able to Create resources in your AWS account.
+3) In the Cloud9 IDE go to "AWS settings" & Disable "AWS managed temporary credentials".
+4) Update "variables.tf" file variables related to Cloud9 VPC (at the bottom of a file) with your Cloud9 VPC configurations.
     
-    > Variables to update; **cloud9_vpc_id, cloud9_subnet_id, cloud9_subnet, cloud9_ig**
+    - cloud9_vpc_id
+    - cloud9_subnet
+    - cloud9_route_table_id
+    
+5) Install 'IAM Authenticator & kubectl' on the Cloud9 Instance or another instance you are going to run your SQL statements from, just make sure to copy kubeconfig from terraform output to the prefered Instance. This configuration allows to your instance to communicate with AWS EKS Docker Container.
 
-3) Install 'IAM Authenticator & kubectl'
-4) Update ./kube/config file with configuration exported from terraform (explained ^)
-5) Use one line command to connect to your MySQL through docker ^
-6) Check for Permissions
+    - [IAM Athenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html) 
+    - [Kubectl](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html)
+
+6) Run:
+    
+        terraform apply
+
+7) Set ./kube/config file with configuration exported from terraform:
+
+        mkdir /home/ec2-user/.kube
+        touch /home/ec2-user/.kube/config
+        // Take notice that the output returns 2 extra lines - first & last line <<EOT & EOT, this command takes care of it.
+        terraform output kubeconfig | tail -n +2 | head -c -5 > /home/ec2-user/.kube/config
+
+    Now your Instance can communicate with your AWS EKS resources. If you prefer to run commands from a different instance, make sure to Install IAM Authenticator & kubectl (links provided in section 5).
+
+8) Use kubectl to connect & execute commands on your MySQL Databases through AWS EKS Docker as such:
+
+    - Getting Endpoint with "terraform output db_endpoint" command
+    - Getting Password from SSM Parameter Store
+
+    **kubectl** commands:
+
+        kubectl run -it --rm --image=akpysec/ubuntu-mysql-cli:latest --restart=Never mysql-client -- mysql --host="<specify_db_endpoint>" --user="<specify_username>" --password="<spicify_password>"
+    **MySQL** statements:
+        
+        // Users Permissions check
+        SELECT CONCAT('SHOW GRANTS FOR \'',user,'\'@\'',host,'\';') FROM mysql.user;
+        SHOW GRANTS FOR 'Username'@'db_endpoint / % / localhost';
+        
+    Or make it one liner:
+        
+        kubectl run -it --rm --image=akpysec/ubuntu-mysql-cli:latest --restart=Never mysql-client -- mysql --host="<specify_db_endpoint>" --user="<specify_username>" --password="<spicify_password>" --execute="<SQL Statement>"
 
 ---
 
-### EKS Instructions
-#### Install Prerequisites:
-
-- [IAM Athenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html) 
-- [Kubectl](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html)
-
-#### Configure Instance to communicate with EKS cluster
-
-Create & copy terraform kubeconfig output to /.kube/kubeconfig file
-Instance Certificate Authentication with EKS needs a CA provided by the "terraform output kubeconfig" command (after terraform builds infrastructure).
-We have to create ./kube directory and config file in it, afterwards append a kubeconfig output with certificate and other configurations.
-- Take notice that the output returns 2 extra lines - first & last line <<EOT & EOT, 3-rd command takes care of it.
-        
-        mkdir /home/ec2-user/.kube
-        touch /home/ec2-user/.kube/config
-        terraform output kubeconfig | tail -n +2 | head -c -5 > /home/ec2-user/.kube/config
-
-## Final POC command
+## Final POC:
 
 Connecting to MySQL DB through EKS-Docker that Downloaded from my Repo at Dockerhub & checking for priveledges assigned.
 
@@ -92,18 +100,7 @@ Permissions:
 
 ![Permissions View](https://user-images.githubusercontent.com/48283299/147382342-7e604b0f-37c5-45a9-b9c0-c8429a768421.PNG)
 
-- Getting Endpoint with "terraform output db_endpoint" command
-- Getting Password from SSM Parameter Store
-      
-#### Commands:
 
-    kubectl run -it --rm --image=akpysec/ubuntu-mysql-cli:latest --restart=Never mysql-client -- mysql --host="<specify_db_endpoint>" --user="<specify_username>" --password="<spicify_password>"
-    
-    SELECT CONCAT('SHOW GRANTS FOR \'',user,'\'@\'',host,'\';') FROM mysql.user;
-    SHOW GRANTS FOR 'Username'@'db_endpoint / % / localhost';
-        
-Or make it one liner:
-        
-    kubectl run -it --rm --image=akpysec/ubuntu-mysql-cli:latest --restart=Never mysql-client -- mysql --host="<specify_db_endpoint>" --user="<specify_username>" --password="<spicify_password>" --execute="<SQL Statement>"
+---
 
 #

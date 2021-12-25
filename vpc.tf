@@ -7,7 +7,6 @@ resource "aws_vpc" "sunny_vpc" {
   }
 }
 
-
 # Creating RDS SUBNETS in a -> SunnyVPC (AZ-1-2) ^
 resource "aws_subnet" "rds_subnet_" {
   count             = 2
@@ -54,7 +53,7 @@ resource "aws_route_table_association" "sunny_db" {
   route_table_id = aws_route_table.sunny_db.id
 }
 
-# Adding Route from Cloud9 to DB subnets
+# Adding Route from Cloud9 subnet to DB subnets
 resource "aws_route" "cloud9_subnet_to_db_subnets" {
   count                     = length(var.db_subnet_cidrs)
   route_table_id            = var.cloud9_route_table_id

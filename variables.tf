@@ -51,10 +51,10 @@ variable "cloud9_vpc_id" {
   default = "vpc-06dec4bd7ac56d988"
 }
 
-variable "cloud9_subnet_id" {
-  type    = string
-  default = "subnet-05d406dfba4584345"
-}
+# variable "cloud9_subnet_id" {
+#   type    = string
+#   default = "subnet-05d406dfba4584345"
+# }
 
 variable "cloud9_subnet" {
   type    = string
@@ -66,7 +66,7 @@ variable "cloud9_route_table_id" {
   default = "rtb-0ea83e644aa7ab3d3"
 }
 
-variable "cloud9_ig" {
-  type    = string
-  default = "igw-0e5cfafe096420345"
-}
+# variable "cloud9_ig" {
+#   type    = string
+#   default = "igw-0e5cfafe096420345"
+# }
