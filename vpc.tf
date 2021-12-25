@@ -55,34 +55,12 @@ resource "aws_route_table_association" "sunny_db" {
 }
 
 # Adding Route from Cloud9 to DB subnets
-resource "aws_route_table" "cloud9_to_db" {
-  vpc_id = var.cloud9_vpc_id
-
-  # For VPC Peering between Sunny VPC & Cloud9 VPC
-  route {
-    cidr_block = var.db_subnet_cidrs[0]
-    gateway_id = aws_vpc_peering_connection.cloud9_to_sunny_vpc.id
-  }
-  
-  route {
-    cidr_block = var.db_subnet_cidrs[1]
-    gateway_id = aws_vpc_peering_connection.cloud9_to_sunny_vpc.id
-  }
-  
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = var.cloud9_ig
-  }
-  
-  tags = {
-    Name  = var.db_tags[0]
-    Owner = var.db_tags[1]
-  }
-}
-
-resource "aws_route_table_association" "cloud9_to_db" {
-  subnet_id      = var.cloud9_subnet_id
-  route_table_id = var.cloud9_route_table_id
+resource "aws_route" "cloud9_subnet_to_db_subnets" {
+  count                     = length(var.db_subnet_cidrs)
+  route_table_id            = var.cloud9_route_table_id
+  destination_cidr_block    = var.db_subnet_cidrs[count.index]
+  vpc_peering_connection_id = aws_vpc_peering_connection.cloud9_to_sunny_vpc.id
+  depends_on                = [aws_route_table.sunny]
 }
 
 # EKS Infrastracture
