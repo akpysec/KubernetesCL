@@ -57,7 +57,3 @@ resource "mysql_grant" "mysql_users_permissions" {
 #   user    = mysql_user.mysql_users[count.index].user
 #   pgp_key = "keybase:${mysql_user.mysql_users[count.index].user}"
 # }
-
-# For tomorrow:
-# - Add passwords and check they are working
-# - Explain adding a right route
