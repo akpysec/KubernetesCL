@@ -23,6 +23,8 @@ Note - Verify your code is running properly, this configuration should be effici
 
 3. Run the image on EKS (K8s), login into the running pod using command line and run a simple query of 'select All' over one of the tables using one or two of the users created using terraform.
 
+---
+
 ## Notice:
 Because I developed all infrastructure from Cloud9 (different VPC) I had trouble creating tables in a MySQL Instance,
 after I resolved the connectivity issue with VPC Peering and routing between the subnets, all worked fine 🎉
@@ -71,11 +73,11 @@ Connecting to MySQL DB through EKS-Docker that Downloaded from my Repo at Docker
 
 #### Connect to DB:
 
-![connection to DB](https://user-images.githubusercontent.com/48283299/147374428-df884aa7-17b8-4a4f-88f2-ac1423aaa1f0.PNG)
+![connection to DB](https://user-images.githubusercontent.com/48283299/147382338-fdec49f4-7353-4abb-b34a-2b52f29d64b2.PNG)
 
 Permissions:
 
-![Permissions View](https://user-images.githubusercontent.com/48283299/147374429-479a3dc7-3d14-4d8e-a038-5ee3809df2b2.PNG)
+![Permissions View](https://user-images.githubusercontent.com/48283299/147382342-7e604b0f-37c5-45a9-b9c0-c8429a768421.PNG)
 
 - Getting Endpoint with "terraform output db_endpoint" command
 - Getting Password from SSM Parameter Store
@@ -86,4 +88,14 @@ Permissions:
         SELECT CONCAT('SHOW GRANTS FOR \'',user,'\'@\'',host,'\';') FROM mysql.user;
         SHOW GRANTS FOR 'Username'@'db_endpoint / % / localhost';
 
+---
+
+### Summary
+1) Update 'variables.tf' with your VPC network & VPC ID if you as me use different VPC from where you run your terraform
+2) Install 'IAM Authenticator & kubectl'
+3) Update ./kube/config file with configuration exported from terraform (explained ^)
+4) Use one line command to connect to your MySQL through docker ^
+5) Check for Permissions
+
 #
+
