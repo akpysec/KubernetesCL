@@ -49,15 +49,17 @@ variable "db_list" {
 variable "cloud9_vpc_id" {
   description = "Enter your Cloud9 VPC ID"
   type    = string
+  #  default = "HARDCODE_VALUE"
 }
 
 variable "cloud9_subnet" {
   type    = string
   description = "Enter subnet where your Cloud9 Instance is hosted"
-#  default = "10.0.0.0/24"
+#  default = "HARDCODE_VALUE"
 }
 
 variable "cloud9_route_table_id" {
   type    = string
   description = "Enter your Cloud9 Route Table ID, so that a routes would be added"
+  #  default = "HARDCODE_VALUE"
 }
