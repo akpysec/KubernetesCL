@@ -105,7 +105,7 @@ Connecting to MySQL DB through EKS-Docker that Downloaded from my Repo at Docker
 
 #### Permissions:
 
-![POC](https://user-images.githubusercontent.com/48283299/147395825-2631e725-8581-46b9-bf4f-5d0265e08b87.PNG)
+![POC](https://user-images.githubusercontent.com/48283299/147395839-71175898-80c7-4fda-88e5-258132ce05eb.PNG)
 
 #
 
