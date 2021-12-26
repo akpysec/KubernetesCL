@@ -43,7 +43,7 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
 
 
 - Build docker image from [Dockerfile](https://github.com/akpysec/Sunny/blob/master/docker/Dockerfile)
-- Pushed the docker image to my container registry at [dockerhub](https://hub.docker.com/repository/docker/akpysec/ubuntu-mysql-cli)
+- Pushed the docker image to my container registry at [Dockerhub](https://hub.docker.com/repository/docker/akpysec/ubuntu-mysql-cli)
 
 #
 
@@ -64,7 +64,7 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
 
     NOTE: Input variables accordingly to Cloud9 VPC configurations or hardcode them in "variables.tf" file (presented at the bottom of a file).
         
-        # Variable names:
+        # Variables to update:
         cloud9_vpc_id
         cloud9_subnet
         cloud9_route_table_id
@@ -73,7 +73,6 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
 
         mkdir /home/ec2-user/.kube
         touch /home/ec2-user/.kube/config
-        # Take notice that the output returns 2 extra lines - first & last line <<EOT & EOT, this command takes care of it.
         terraform output kubeconfig | tail -n +2 | head -c -5 > /home/ec2-user/.kube/config
         
 
