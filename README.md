@@ -41,7 +41,8 @@ after I resolved the connectivity issue with VPC Peering and routing between the
 ### Prerequisites:
 
 
-- Build docker from [Dockerfile]("./docker/Dockerfile")
+- Build docker image from [Dockerfile]("./docker/Dockerfile")
+- Pushed the docker image to my container registry at [dockerhub]("https://hub.docker.com/repository/docker/akpysec/ubuntu-mysql-cli")
 
 #
 
