@@ -11,8 +11,6 @@ provider "mysql" {
   password = data.aws_ssm_parameter.rds_master_password.value
 }
 
-provider "http" {}
-
 terraform {
   required_providers {
     mysql = {
