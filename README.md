@@ -89,6 +89,8 @@ after I resolved the connectivity issue with VPC Peering and routing between the
         # Users Permissions check
         SELECT CONCAT('SHOW GRANTS FOR \'',user,'\'@\'',host,'\';') FROM mysql.user;
         SHOW GRANTS FOR 'Username'@'db_endpoint / % / localhost';
+        # Created database tables check
+        SHOW DATABASES;
         
     Or make it one liner:
         
@@ -107,6 +109,10 @@ Connecting to MySQL DB through EKS-Docker that Downloaded from my Repo at Docker
 #### Permissions:
 
 ![POC](https://user-images.githubusercontent.com/48283299/147395839-71175898-80c7-4fda-88e5-258132ce05eb.PNG)
+
+#### Database tables:
+
+![POC_DB_TABLES](https://user-images.githubusercontent.com/48283299/147400732-fd0a734d-7d3f-4976-8c9a-af8aea008cd3.PNG)
 
 #
 
