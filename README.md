@@ -78,8 +78,11 @@ after I resolved the connectivity issue with VPC Peering and routing between the
 
 8) Use kubectl to connect & execute commands on your MySQL Databases through AWS EKS Docker as such:
 
-    - Getting Endpoint with "terraform output db_endpoint" command
-    - Getting Password from SSM Parameter Store
+    - Getting Endpoint with command
+ 
+            terraform output db_endpoint
+            
+    - Getting Password from SSM Parameter Store or Backend .tfstate from S3
 
     **kubectl** commands:
 
