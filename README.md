@@ -42,7 +42,7 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
 ### Prerequisites:
 
 
-- Build docker image from [Dockerfile]("./docker/Dockerfile")
+- Build docker image from [Dockerfile](https://github.com/akpysec/Sunny/blob/master/docker/Dockerfile)
 - Pushed the docker image to my container registry at [dockerhub](https://hub.docker.com/repository/docker/akpysec/ubuntu-mysql-cli)
 
 #
