@@ -51,21 +51,21 @@ after I resolved the connectivity issue with VPC Peering and routing between the
 1) Create Cloud9 Developer environment.
 2) Assign role with service specific permissions so Cloud9-Instance could create resources on it's behalf.
 3) In the Cloud9 IDE go to "AWS settings" & Disable "AWS managed temporary credentials".
-4) Update "variables.tf" file variables related to Cloud9 VPC (presented at the bottom of a file) with your Cloud9 VPC configurations.
-    
-    - cloud9_vpc_id
-    - cloud9_subnet
-    - cloud9_route_table_id
-    
-5) Install 'IAM Authenticator & kubectl' on the Cloud9 Instance or another instance from which you are going to run SQL queries, just make sure to copy kubeconfig from terraform output to the prefered Instance. This configuration allows your instance to communicate with AWS EKS. Note, If your instance is outside of AWS use Public cluster.
+4) Install 'IAM Authenticator & kubectl' on the Cloud9 Instance or another instance from which you are going to run SQL queries, just make sure to copy kubeconfig from terraform output to the prefered Instance. This configuration allows your instance to communicate with AWS EKS. Note, If your instance is outside of AWS use Public cluster.
 
     - [IAM Athenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html) 
     - [Kubectl](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html)
 
-6) Run:
+5) Run:
     
         # Don't forget to change backend S3 bucket name
         terraform apply
+
+NOTE: Input variables accordingly to Cloud9 VPC configurations or hardcode them in "variables.tf" file (presented at the bottom of a file).
+    
+    - cloud9_vpc_id
+    - cloud9_subnet
+    - cloud9_route_table_id
 
 7) Set ./kube/config file with configuration exported from terraform:
 
