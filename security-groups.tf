@@ -11,13 +11,6 @@ resource "aws_security_group" "db_sg" {
     cidr_blocks = [var.eks_subnet_cidrs[0], var.eks_subnet_cidrs[1], var.cloud9_subnet]
   }
 
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
   tags = {
     Name  = var.db_tags[0]
     Owner = var.db_tags[1]
@@ -34,13 +27,22 @@ resource "aws_security_group" "sunny-cluster" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = [var.eks_subnet_cidrs[0], var.eks_subnet_cidrs[1]]
   }
 
   tags = {
     Name  = var.eks_tags[0],
     Owner = var.eks_tags[1]
   }
-
 }
 
+# Ingress rules SG group
+resource "aws_security_group_rule" "sunny-cluster-ingress-workstation-https" {
+  cidr_blocks       = [var.cloud9_subnet]
+  description       = "Allow Cloud9 Instance to communicate with the cluster API Server"
+  from_port         = 443
+  protocol          = "tcp"
+  security_group_id = aws_security_group.sunny-cluster.id
+  to_port           = 443
+  type              = "ingress"
+}

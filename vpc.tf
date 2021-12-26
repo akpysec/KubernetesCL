@@ -59,7 +59,14 @@ resource "aws_route" "cloud9_subnet_to_db_subnets" {
   route_table_id            = var.cloud9_route_table_id
   destination_cidr_block    = var.db_subnet_cidrs[count.index]
   vpc_peering_connection_id = aws_vpc_peering_connection.cloud9_to_sunny_vpc.id
-  depends_on                = [aws_route_table.sunny]
+}
+
+# Adding Route from Cloud9 subnet to EKS subnets
+resource "aws_route" "cloud9_subnet_to_eks_subnets" {
+  count                     = length(var.eks_subnet_cidrs)
+  route_table_id            = var.cloud9_route_table_id
+  destination_cidr_block    = var.eks_subnet_cidrs[count.index]
+  vpc_peering_connection_id = aws_vpc_peering_connection.cloud9_to_sunny_vpc.id
 }
 
 # EKS Infrastracture
@@ -78,21 +85,17 @@ resource "aws_subnet" "sunny" {
   }
 }
 
-resource "aws_internet_gateway" "sunny" {
-  vpc_id = aws_vpc.sunny_vpc.id
-
-  tags = {
-    Name  = var.eks_tags[0],
-    Owner = var.eks_tags[1]
-  }
-}
-
 resource "aws_route_table" "sunny" {
   vpc_id = aws_vpc.sunny_vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.sunny.id
+  }
+
+  route {
+    cidr_block = var.cloud9_subnet
+    gateway_id = aws_vpc_peering_connection.cloud9_to_sunny_vpc.id
   }
 
   tags = {
@@ -105,4 +108,13 @@ resource "aws_route_table_association" "sunny" {
   count          = 2
   subnet_id      = aws_subnet.sunny.*.id[count.index]
   route_table_id = aws_route_table.sunny.id
+}
+
+resource "aws_internet_gateway" "sunny" {
+  vpc_id = aws_vpc.sunny_vpc.id
+
+  tags = {
+    Name  = var.eks_tags[0],
+    Owner = var.eks_tags[1]
+  }
 }

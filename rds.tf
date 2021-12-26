@@ -36,7 +36,7 @@ resource "mysql_database" "app" {
 resource "mysql_user" "mysql_users" {
   count              = length(var.user_list)
   user               = element(var.user_list, count.index)
-  host               = aws_db_instance.sunny_db.address
+  host               = "%"
   tls_option         = "SSL"
   plaintext_password = data.aws_ssm_parameter.rds_users_passwords[count.index].value
 }
@@ -50,10 +50,3 @@ resource "mysql_grant" "mysql_users_permissions" {
   database   = "*"
   privileges = ["SELECT"]
 }
-
-
-# resource "mysql_user_password" "mysql_users_passwords" {
-#   count      = length(var.user_list)
-#   user    = mysql_user.mysql_users[count.index].user
-#   pgp_key = "keybase:${mysql_user.mysql_users[count.index].user}"
-# }
