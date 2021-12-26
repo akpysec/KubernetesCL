@@ -63,6 +63,7 @@ after I resolved the connectivity issue with VPC Peering and routing between the
 
 6) Run:
     
+        # Don't forget to change backend S3 bucket name
         terraform apply
 
 7) Set ./kube/config file with configuration exported from terraform:
