@@ -48,15 +48,16 @@ variable "db_list" {
 # Update those variables to match your VPC
 variable "cloud9_vpc_id" {
   type    = string
-  default = "vpc-06dec4bd7ac56d988"
+  default = "<UPDATE FIELD>" 
 }
 
 variable "cloud9_subnet" {
   type    = string
-  default = "10.0.0.0/24"
+  default = "<UPDATE FIELD>" 
+#  default = "10.0.0.0/24"
 }
 
 variable "cloud9_route_table_id" {
   type    = string
-  default = "rtb-0ea83e644aa7ab3d3"
+  default = "<UPDATE FIELD>" 
 }
