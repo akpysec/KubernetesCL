@@ -52,7 +52,7 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
 1) Create Cloud9 Developer environment.
 2) Assign role with service specific permissions so Cloud9-Instance could create resources on it's behalf.
 3) In the Cloud9 IDE go to "AWS settings" & Disable "AWS managed temporary credentials".
-4) Install 'IAM Authenticator & kubectl' on the Cloud9 Instance or another instance from which you are going to run SQL queries, just make sure to copy kubeconfig from terraform output to the prefered Instance. This configuration allows your instance to communicate with AWS EKS. Note, If your instance is outside of AWS use Public cluster.
+4) Install "IAM Authenticator & kubectl" on the Cloud9 Instance or another instance from which you are going to run SQL queries, just make sure to copy kubeconfig from terraform output to the prefered Instance. This configuration allows your instance to communicate with AWS EKS. Note, If your instance is outside of AWS use Public cluster.
 
     - [IAM Athenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html) 
     - [Kubectl](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html)
@@ -107,7 +107,7 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
 
 Connecting to MySQL DB through EKS-Docker that is pulled from my Repo at Dockerhub & checking for priveledges assigned.
 
-P.S. Docker self destructs after performing a work. 💥
+P.S. Docker self destructs after performing a work 💥
 
 #### Connect to DB:
 
