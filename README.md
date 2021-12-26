@@ -106,7 +106,8 @@ after I resolved the connectivity issue with VPC Peering and routing between the
 ## POC:
 
 Connecting to MySQL DB through EKS-Docker that is pulled from my Repo at Dockerhub & checking for priveledges assigned.
-P.S. Docker self destructs after performing a work. 
+
+P.S. Docker self destructs after performing a work. 💥
 
 #### Connect to DB:
 
