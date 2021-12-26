@@ -61,11 +61,11 @@ after I resolved the connectivity issue with VPC Peering and routing between the
         # Don't forget to change backend S3 bucket name
         terraform apply
 
-NOTE: Input variables accordingly to Cloud9 VPC configurations or hardcode them in "variables.tf" file (presented at the bottom of a file).
-    
-    - cloud9_vpc_id
-    - cloud9_subnet
-    - cloud9_route_table_id
+    NOTE: Input variables accordingly to Cloud9 VPC configurations or hardcode them in "variables.tf" file (presented at the bottom of a file).
+        
+        - cloud9_vpc_id
+        - cloud9_subnet
+        - cloud9_route_table_id
 
 7) Set ./kube/config file with configuration exported from terraform:
 
