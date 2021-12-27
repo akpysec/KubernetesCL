@@ -31,14 +31,14 @@ after I resolved the connectivity issue with VPC Peering and routing between the
 Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture/SUNNY_ARCH_2021_V01.pdf) for better understanding of an Infrastructure flow.
 #
 
-### Networking:
+### Security Groups information:
     
     # EKS Cluster Configured is hosted in 192.168.0.0/24 (Managed by AWS)
-    Cloud9 Instance (10.0.0.X/24)       >> TCP/IP 3306 >> DB Instance (172.16.100-1.X/24)
-    Cloud9 Instance (10.0.0.X/24)       >> TCP/IP 443  >> EKS Node    (172.16.200-1.X/24)
-    EKS Node        (172.16.200-1.X/24) >> TCP/IP 3306 >> DB Instance (172.16.100-1.X/24)
-    EKS Cluster     (192.168.0.0/16)    >> TCP/IP ANY  >> EKS Node    (172.16.100-1.X/24)
-    EKS Node        (172.16.200-1.X/24) >> TCP/IP 443  >> Internet GW (0.0.0.0/0)
+    Cloud9 Instance  (10.0.0.X/24)       >> TCP/IP 3306 >> DB Instance            (172.16.100-1.X/24) // DB SG
+    Cloud9 Instance  (10.0.0.X/24)       >> TCP/IP 443  >> EKS Cluster API Server (192.168.0.X/16)    // EKS SG
+    EKS Node Subnets (172.16.200-1.X/24) >> TCP/IP 3306 >> DB Instance            (172.16.100-1.X/24) // DB SG
+    EKS Cluster      (192.168.0.0/16)    >> TCP/IP ANY  >> EKS Node               (172.16.100-1.X/24) // No SG
+    EKS Node         (172.16.200-1.X/24) >> TCP/IP 443  >> Internet GW            (0.0.0.0/0)         // No SG
     
 #
 
