@@ -22,7 +22,7 @@ variable "eks_subnet_cidrs" {
 
 variable "eks_to_node_ports" {
   default     = [443, 10250, 53]
-  type        = number
+  type        = list(number)
   description = "Cluster to Node minimum port restriction"
 }
 
