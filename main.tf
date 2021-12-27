@@ -12,18 +12,23 @@ provider "mysql" {
 }
 
 terraform {
-  required_providers {
-    mysql = {
-      source  = "winebarrel/mysql"
-      version = "1.10.6"
-    }
-  }
-}
-
-terraform {
+  
   backend "s3" {
     bucket = "sunbit-interview"
     key    = "environment/terraform.tfstate"
     region = "us-east-1"
+  }
+
+  required_providers {
+    
+    mysql = {
+      source  = "winebarrel/mysql"
+      version = "1.10.6"
+    }
+    
+    http = {
+      source = "hashicorp/http"
+      version = "2.1.0" 
+    }
   }
 }
