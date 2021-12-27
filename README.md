@@ -35,9 +35,9 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
     
     # EKS Cluster Configured is hosted in 192.168.0.0/24 (Managed by AWS)
     Cloud9 Instance  (10.0.0.X/24)       >> TCP/IP 3306 >> DB Instance            (172.16.100-1.X/24) // DB SG
-    Cloud9 Instance  (10.0.0.X/24)       >> TCP/IP 443  >> EKS Cluster API Server (192.168.0.X/16)    // EKS SG
+    Cloud9 Instance  (10.0.0.X/24)       >> TCP/IP 443  >> EKS Cluster API Server (192.168.0.X/16)    // Cluster SG
     EKS Node Subnets (172.16.200-1.X/24) >> TCP/IP 3306 >> DB Instance            (172.16.100-1.X/24) // DB SG
-    EKS Cluster      (192.168.0.0/16)    >> TCP/IP ANY  >> EKS Node               (172.16.100-1.X/24) // No SG
+    EKS Cluster      (192.168.0.0/16)    >> TCP/IP ANY  >> EKS Node               (172.16.100-1.X/24) // Cluster SG
     EKS Node         (172.16.200-1.X/24) >> TCP/IP 443  >> Internet GW            (0.0.0.0/0)         // No SG
     
 #
