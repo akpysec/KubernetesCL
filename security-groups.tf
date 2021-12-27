@@ -23,11 +23,14 @@ resource "aws_security_group" "sunny-cluster" {
   description = "Cluster communication with worker nodes"
   vpc_id      = aws_vpc.sunny_vpc.id
 
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = [var.eks_subnet_cidrs[0], var.eks_subnet_cidrs[1]]
+  dynamic "egress" {
+    for_each = var.eks_to_node_ports
+    content {
+      from_port   = egress.value
+      to_port     = egress.value
+      protocol    = "tcp"
+      cidr_blocks = [var.eks_subnet_cidrs[0], var.eks_subnet_cidrs[1]]
+    }
   }
 
   tags = {
