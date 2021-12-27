@@ -75,8 +75,6 @@ resource "aws_subnet" "sunny" {
   vpc_id                  = aws_vpc.sunny_vpc.id
   cidr_block              = var.eks_subnet_cidrs[count.index]
   availability_zone       = data.aws_availability_zones.available.names[count.index]
-  map_public_ip_on_launch = true
-
 
   tags = {
     Name  = var.eks_tags[0]
