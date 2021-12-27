@@ -19,3 +19,8 @@ data "aws_db_instance" "sunny_db" {
   db_instance_identifier = var.db_tags[2]
   depends_on             = [aws_db_instance.sunny_db]
 }
+
+# Getting local IP address
+data "http" "local_ip" {
+  url = "http://169.254.169.254/latest/meta-data/local-ipv4"
+}
