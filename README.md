@@ -32,11 +32,14 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
 #
 
 ### Networking:
-
+    
+    # EKS Cluster Configured is hosted in 192.168.0.0/24 (Managed by AWS)
     Cloud9 Instance (10.0.0.X/24)       >> TCP/IP 3306 >> DB Instance (172.16.100-1.X/24)
-    Cloud9 Instance (10.0.0.X/24)       >> TCP/IP 443  >> EKS Cluster (172.16.200-1.X/24)
-    EKS Cluster     (172.16.200-1.X/24) >> TCP/IP 3306 >> DB Instance (172.16.100-1.X/24)
-
+    Cloud9 Instance (10.0.0.X/24)       >> TCP/IP 443  >> EKS Node    (172.16.200-1.X/24)
+    EKS Node        (172.16.200-1.X/24) >> TCP/IP 3306 >> DB Instance (172.16.100-1.X/24)
+    EKS Cluster     (192.168.0.0/16)    >> TCP/IP ANY  >> EKS Node    (172.16.100-1.X/24)
+    EKS Node        (172.16.200-1.X/24) >> TCP/IP 443  >> Internet GW (0.0.0.0/0)
+    
 #
 
 ### Prerequisites:
