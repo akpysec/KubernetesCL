@@ -39,9 +39,8 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
     Cloud9 Instance  (10.0.0.X/24)       >> TCP/IP 443  >> EKS Cluster API Server (192.168.0.X/16)    // Cluster SG
     EKS Cluster      (192.168.0.0/16)    >> TCP/IP ANY  >> EKS Node               (172.16.100-1.X/24) // Cluster SG
 
-#
 
-Cluster to Node(s) minimum ports were given, based of [Documentation](https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html).
+* Cluster to Node(s) minimum ports were given, based of [Documentation](https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html).
 
 #
 
