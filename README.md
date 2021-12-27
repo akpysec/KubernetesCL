@@ -40,7 +40,7 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
     EKS Cluster         (192.168.0.0/16)    >> TCP/IP 443, 10250, 53  >> EKS Node(s) Subnets    (172.16.200-1.X/24) // Cluster SG
 
 
-* Cloud9 Instance specific IP address inserted into Security Groups 
+* Cloud9 Instance specific IP address inserted into Security Groups, also only specific routing is implied from the Cloud9 Instance and backwards.
 * Cluster to Node(s) minimum ports were given, based of [Documentation](https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html).
 
 #
@@ -73,7 +73,6 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
         # Variables to update:
         cloud9_vpc_id
         cloud9_route_table_id
-        cloud9_subnet
 
 7) Set ./kube/config file with configuration exported from terraform:
 

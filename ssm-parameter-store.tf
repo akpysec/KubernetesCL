@@ -1,7 +1,8 @@
 # Generate Master Password
 resource "random_string" "rds_master_password" {
-  length  = 16
+  length = 16
   # special = true
+  # override_special = "_%\\ztrnb\\'0\" /@"
 }
 
 # Store Master Password in SSM Parameter Store
@@ -18,9 +19,10 @@ resource "aws_ssm_parameter" "rds_master_password" {
 
 # Generate Users Passwords
 resource "random_string" "rds_users_passwords" {
-  count   = length(var.user_list)
-  length  = 16
+  count  = length(var.user_list)
+  length = 16
   # special = true
+  # override_special = "_%\\ztrnb\\'0\" /@"
 }
 
 # Store Users Passwords in SSM Parameter Store

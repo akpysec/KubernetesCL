@@ -48,5 +48,6 @@ resource "mysql_grant" "mysql_users_permissions" {
   user       = mysql_user.mysql_users[count.index].user
   host       = mysql_user.mysql_users[count.index].host
   database   = "*"
+  tls_option = "SSL"
   privileges = ["SELECT"]
 }

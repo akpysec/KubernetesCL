@@ -1,8 +1,3 @@
-# Getting Cloud9 Instance Local IP
-locals {
-  local_ip = "${chomp(data.http.local_ip.body)}/32"
-}
-
 # RDS - MySQL Security Group
 resource "aws_security_group" "db_sg" {
   name        = "to_DB"

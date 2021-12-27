@@ -37,7 +37,7 @@ resource "aws_route_table" "sunny_db" {
 
   # For VPC Peering between Sunny VPC & Cloud9 VPC
   route {
-    cidr_block = var.cloud9_subnet
+    cidr_block = local.local_ip
     gateway_id = aws_vpc_peering_connection.cloud9_to_sunny_vpc.id
   }
 
@@ -76,7 +76,7 @@ resource "aws_subnet" "sunny" {
   cidr_block              = var.eks_subnet_cidrs[count.index]
   availability_zone       = data.aws_availability_zones.available.names[count.index]
   map_public_ip_on_launch = true
-  
+
   tags = {
     Name  = var.eks_tags[0]
     Owner = var.eks_tags[1]
@@ -93,7 +93,7 @@ resource "aws_route_table" "sunny" {
   }
 
   route {
-    cidr_block = var.cloud9_subnet
+    cidr_block = local.local_ip
     gateway_id = aws_vpc_peering_connection.cloud9_to_sunny_vpc.id
   }
 

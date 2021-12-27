@@ -51,23 +51,20 @@ variable "db_list" {
   default = ["Prod", "Test", "Stage", "Dev"]
 }
 
+# Getting Cloud9 Instance Local IP
+locals {
+  local_ip = "${chomp(data.http.local_ip.body)}/32"
+}
+
 # Update those variables to match your VPC
 variable "cloud9_vpc_id" {
   description = "Enter your Cloud9 VPC ID"
-  type    = string
+  type        = string
   #  default = "HARDCODE_VALUE"
 }
 
 variable "cloud9_route_table_id" {
-  type    = string
+  type        = string
   description = "Enter your Cloud9 Route Table ID, so that a routes back would be added for the purpose of VPC peering"
   #  default = "HARDCODE_VALUE"
 }
-
-# Setting up Cloud9 network with CIDR
-variable "cloud9_subnet" {
-  type = string
-  description = "Enter subnet where Cloud9 Instance is hosted (as such 10.0.0.0/24)"
-  #  default = "HARDCODE_VALUE"
-}
-
