@@ -1,3 +1,8 @@
+# Getting Cloud9 Instance Local IP
+locals {
+  local_ip = "${chomp(data.http.local_ip.body)}/32"
+}
+
 # RDS - MySQL Security Group
 resource "aws_security_group" "db_sg" {
   name        = "to_DB"
@@ -8,7 +13,7 @@ resource "aws_security_group" "db_sg" {
     from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
-    cidr_blocks = [var.eks_subnet_cidrs[0], var.eks_subnet_cidrs[1], var.cloud9_subnet]
+    cidr_blocks = [var.eks_subnet_cidrs[0], var.eks_subnet_cidrs[1], local.local_ip]
   }
 
   tags = {
@@ -41,7 +46,7 @@ resource "aws_security_group" "sunny-cluster" {
 
 # Ingress rules SG group
 resource "aws_security_group_rule" "sunny-cluster-ingress-workstation-https" {
-  cidr_blocks       = [var.cloud9_subnet]
+  cidr_blocks       = [local.local_ip]
   description       = "Allow Cloud9 Instance to communicate with the cluster API Server"
   from_port         = 443
   protocol          = "tcp"
