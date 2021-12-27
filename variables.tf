@@ -63,3 +63,11 @@ variable "cloud9_route_table_id" {
   description = "Enter your Cloud9 Route Table ID, so that a routes back would be added for the purpose of VPC peering"
   #  default = "HARDCODE_VALUE"
 }
+
+# Setting up Cloud9 network with CIDR
+variable "cloud9_subnet" {
+  type = string
+  description = "Enter subnet where Cloud9 Instance is hosted (as such 10.0.0.0/24)"
+  #  default = "HARDCODE_VALUE"
+}
+
