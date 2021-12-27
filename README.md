@@ -73,6 +73,7 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
         # Variables to update:
         cloud9_vpc_id
         cloud9_route_table_id
+        cloud9_subnet
 
 7) Set ./kube/config file with configuration exported from terraform:
 
