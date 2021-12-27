@@ -20,6 +20,10 @@ variable "eks_subnet_cidrs" {
   description = "K8s Subnets"
 }
 
+variable "eks_to_node_ports" {
+  default = [443, 10250, 53]
+}
+
 variable "db_tags" {
   type    = list(string)
   default = ["SUNNY-DB", "AKpySec", "sunny-mysql"]
