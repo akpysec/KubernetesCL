@@ -40,6 +40,7 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
     EKS Cluster         (192.168.0.0/16)    >> TCP/IP 443, 10250, 53  >> EKS Node(s) Subnets    (172.16.200-1.X/24) // Cluster SG
 
 
+* Cloud9 Instance specific IP address inserted into Security Groups 
 * Cluster to Node(s) minimum ports were given, based of [Documentation](https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html).
 
 #
