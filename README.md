@@ -131,10 +131,11 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
     
     # Example queries to run:
     # Users Permissions check
-    SELECT CONCAT('SHOW GRANTS FOR \'',user,'\'@\'',host,'\';') FROM mysql.user;
-    SHOW GRANTS FOR 'Username'@'db_endpoint / % / localhost';
+    # SELECT CONCAT('SHOW GRANTS FOR \'',user,'\'@\'',host,'\';') FROM mysql.user;
+    # SHOW GRANTS FOR 'Username'@'db_endpoint / % / localhost';
+    
     # Created database tables check
-    SHOW DATABASES;
+    # SHOW DATABASES;
 
 #
 
