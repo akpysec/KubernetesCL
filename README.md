@@ -68,11 +68,10 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
         # Don't forget to change backend S3 bucket name
         terraform apply
 
-    NOTE: Input variables accordingly to Cloud9 VPC configurations or hardcode them in "variables.tf" file (presented at the bottom of a file).
+    NOTE: Input variables accordingly to Cloud9 VPC configurations or hardcode them in "variables.tf" file (presented at the bottom of a file). Variable assignment maybe passed through one liner as such:
         
-        # Variables to update:
-        cloud9_vpc_id
-        cloud9_route_table_id
+        terraform apply -var cloud9_vpc_id="INSERT_CLOUD9_VPC_ID" -var cloud9_route_table_id="INSERT_CLOUD9_ROUTE_TABLE_ID"
+
 
 7) Set ./kube/config file with configuration exported from terraform:
 
@@ -113,7 +112,8 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
 
     # Download Repository
     sudo git clone https://github.com/akpysec/Sunny
-    sudo chown -R ec2-user:ec2-user Sunny
+    # Give user permission if needed
+    # sudo chown -R ec2-user:ec2-user Sunny
     cd Sunny/
     
     # Run Terraform Template
