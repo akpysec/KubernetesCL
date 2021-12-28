@@ -53,7 +53,7 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
 
 #
 
-### Summary
+### Description
 
 1) Create Cloud9 Developer environment.
 2) Assign role with service specific permissions so Cloud9-Instance could create resources on it's behalf.
@@ -93,7 +93,8 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
 
     **kubectl** commands:
 
-        kubectl run -it --rm --image=akpysec/ubuntu-mysql-cli:latest --restart=Never mysql-client -- mysql --host="<specify_db_endpoint>" --user="<specify_username>" --password="<spicify_password>"
+        kubectl run -it --rm --image=akpysec/ubuntu-mysql-cli:latest --restart=Never mysql-client -- mysql --host="<SPECIFY_DB_ENDPOINT>" --user="<SPECIFY_USERNAME>" --password="<SPICIFY_PASSWORD>"
+    
     **MySQL** queries:
         
         # Users Permissions check
@@ -104,11 +105,37 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
         
     Or make it one liner:
         
-        kubectl run -it --rm --image=akpysec/ubuntu-mysql-cli:latest --restart=Never mysql-client -- mysql --host="<specify_db_endpoint>" --user="<specify_username>" --password="<spicify_password>" --execute="<SQL Statement>"
+        kubectl run -it --rm --image=akpysec/ubuntu-mysql-cli:latest --restart=Never mysql-client -- mysql --host="<SPECIFY_DB_ENDPOINT>" --user="<SPECIFY_USERNAME>" --password="<SPICIFY_PASSWORD>" --execute="<SQL_QUERY>"
 
 ---
 
-## POC:
+### Summary
+
+    # Download Repository
+    sudo git clone https://github.com/akpysec/Sunny
+    sudo chown -R ec2-user:ec2-user Sunny
+    cd Sunny/
+    
+    # Run Terraform Template
+    terraform init
+    terraform apply -var cloud9_vpc_id="INSERT_CLOUD9_VPC_ID" -var cloud9_route_table_id="INSERT_CLOUD9_ROUTE_TABLE_ID"
+    
+    # Set up kubeconfig file
+    mkdir /home/ec2-user/.kube
+    touch /home/ec2-user/.kube/config
+    terraform output kubeconfig | tail -n +2 | head -c -5 > /home/ec2-user/.kube/config
+    
+    # Run Container & Query DB
+    kubectl run -it --rm --image=akpysec/ubuntu-mysql-cli:latest --restart=Never mysql-client -- mysql --host="<SPECIFY_DB_ENDPOINT>" --user="<SPECIFY_USERNAME>" --password="<SPICIFY_PASSWORD>" --execute="<SQL_QUERY>"
+    
+    # Example queries to run:
+    # Users Permissions check
+    SELECT CONCAT('SHOW GRANTS FOR \'',user,'\'@\'',host,'\';') FROM mysql.user;
+    SHOW GRANTS FOR 'Username'@'db_endpoint / % / localhost';
+    # Created database tables check
+    SHOW DATABASES;
+
+### POC:
 
 Connecting to MySQL DB through EKS-Docker that is pulled from my Repo at Dockerhub & checking for priveledges assigned.
 
