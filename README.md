@@ -48,12 +48,12 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
 ### Prerequisites:
 
 
-- Build docker image from [Dockerfile](https://github.com/akpysec/Sunny/blob/master/docker/Dockerfile)
+- Built docker image from [Dockerfile](https://github.com/akpysec/Sunny/blob/master/docker/Dockerfile)
 - Pushed the docker image to my container registry at [Dockerhub](https://hub.docker.com/repository/docker/akpysec/ubuntu-mysql-cli)
 
 #
 
-### Description
+#### Description
 
 1) Create Cloud9 Developer environment.
 2) Assign role with service specific permissions so Cloud9-Instance could create resources on it's behalf.
