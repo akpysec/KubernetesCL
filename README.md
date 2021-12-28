@@ -113,7 +113,7 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
 
     # Download Repository
     sudo git clone https://github.com/akpysec/Sunny
-    # Give user permission if needed
+    # Change folders & files owner if needed
     # sudo chown -R ec2-user:ec2-user Sunny
     cd Sunny/
     
