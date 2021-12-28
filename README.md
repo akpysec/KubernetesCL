@@ -127,6 +127,7 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
     terraform output kubeconfig | tail -n +2 | head -c -5 > /home/ec2-user/.kube/config
     
     # Run Container & Query DB
+    terraform output db_endpoint
     kubectl run -it --rm --image=akpysec/ubuntu-mysql-cli:latest --restart=Never mysql-client -- mysql --host="<SPECIFY_DB_ENDPOINT>" --user="<SPECIFY_USERNAME>" --password="<SPICIFY_PASSWORD>" --execute="<SQL_QUERY>"
     
     # Example queries to run:
