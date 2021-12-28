@@ -66,6 +66,7 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
 5) Run:
     
         # Don't forget to change backend S3 bucket name
+        temporary init
         terraform apply
 
     NOTE: Input variables accordingly to Cloud9 VPC configurations or hardcode them in "variables.tf" file (presented at the bottom of a file). Variable assignment maybe passed through one liner as such:
@@ -106,7 +107,7 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
         
         kubectl run -it --rm --image=akpysec/ubuntu-mysql-cli:latest --restart=Never mysql-client -- mysql --host="<SPECIFY_DB_ENDPOINT>" --user="<SPECIFY_USERNAME>" --password="<SPICIFY_PASSWORD>" --execute="<SQL_QUERY>"
 
----
+#
 
 ### Summary
 
@@ -134,6 +135,8 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
     SHOW GRANTS FOR 'Username'@'db_endpoint / % / localhost';
     # Created database tables check
     SHOW DATABASES;
+
+#
 
 ### POC:
 
