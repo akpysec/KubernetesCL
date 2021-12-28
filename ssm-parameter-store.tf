@@ -37,3 +37,4 @@ resource "aws_ssm_parameter" "rds_users_passwords" {
     Owner = var.db_tags[1]
   }
 }
+
