@@ -28,7 +28,7 @@ Note - Verify your code is running properly, this configuration should be effici
 Because I developed all infrastructure from Cloud9 (different VPC) I had trouble creating tables in a MySQL Instance,
 after I resolved the connectivity issue with VPC Peering and routing between the subnets, all worked fine 🎉
 
-Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture/SUNNY_ARCH_2021_V01.pdf) for better understanding of an Infrastructure flow.
+Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture/ARCH_2021_V01.pdf) for better understanding of an Infrastructure flow.
 #
 
 ### 🔒 Security Groups information:
