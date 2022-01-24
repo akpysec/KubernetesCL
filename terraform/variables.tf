@@ -37,11 +37,13 @@ locals {
 
 # Update those variables to match your VPC
 variable "cloud9_vpc_id" {
-  type    = string
-  default = "vpc-06dec4bd7ac56d988"
+  type        = string
+  description = "Enter Cloud9 VPC"
+  # default = "vpc-06dec4bd7ac56d988"
 }
 
 variable "cloud9_route_table_id" {
-  type    = string
-  default = "rtb-0ea83e644aa7ab3d3"
+  type        = string
+  description = "Enter Cloud9 route table"
+  # default = "rtb-0ea83e644aa7ab3d3"
 }
