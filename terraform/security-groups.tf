@@ -1,27 +1,8 @@
-# RDS - MySQL Security Group
-resource "aws_security_group" "db_sg" {
-  name        = "to_DB"
-  description = "Allow inbound traffic from EKS"
-  vpc_id      = aws_vpc.sunny_vpc.id
-
-  ingress {
-    from_port   = 3306
-    to_port     = 3306
-    protocol    = "tcp"
-    cidr_blocks = [var.eks_subnet_cidrs[0], var.eks_subnet_cidrs[1], local.local_ip]
-  }
-
-  tags = {
-    Name  = var.db_tags[0]
-    Owner = var.db_tags[1]
-  }
-}
-
 # EKS - Security Group allowing communication with worker node
-resource "aws_security_group" "sunny-cluster" {
-  name        = "terraform-eks-sunny-cluster"
+resource "aws_security_group" "kubik-cluster" {
+  name        = "terraform-eks-kubik-cluster"
   description = "Cluster communication with worker nodes"
-  vpc_id      = aws_vpc.sunny_vpc.id
+  vpc_id      = aws_vpc.kubik_vpc.id
 
   dynamic "egress" {
     for_each = var.eks_to_node_ports
@@ -40,12 +21,12 @@ resource "aws_security_group" "sunny-cluster" {
 }
 
 # Ingress rules SG group
-resource "aws_security_group_rule" "sunny-cluster-ingress-workstation-https" {
+resource "aws_security_group_rule" "kubik-cluster-ingress-workstation-https" {
   cidr_blocks       = [local.local_ip]
   description       = "Allow Cloud9 Instance to communicate with the cluster API Server"
   from_port         = 443
   protocol          = "tcp"
-  security_group_id = aws_security_group.sunny-cluster.id
+  security_group_id = aws_security_group.kubik-cluster.id
   to_port           = 443
   type              = "ingress"
 }

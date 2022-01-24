@@ -7,7 +7,7 @@ metadata:
   namespace: kube-system
 data:
   mapRoles: |
-    - rolearn: ${aws_iam_role.sunny-node.arn}
+    - rolearn: ${aws_iam_role.kubik-node.arn}
       username: system:node:{{EC2PrivateDNSName}}
       groups:
         - system:bootstrappers
@@ -18,8 +18,8 @@ CONFIGMAPAWSAUTH
 apiVersion: v1
 clusters:
 - cluster:
-    server: ${aws_eks_cluster.sunny.endpoint}
-    certificate-authority-data: ${aws_eks_cluster.sunny.certificate_authority[0].data}
+    server: ${aws_eks_cluster.kubik.endpoint}
+    certificate-authority-data: ${aws_eks_cluster.kubik.certificate_authority[0].data}
   name: kubernetes
 contexts:
 - context:
@@ -38,7 +38,7 @@ users:
       args:
         - "token"
         - "-i"
-        - "${var.sunny_cluster_name}"
+        - "${var.kubik_cluster_name}"
 KUBECONFIG
 }
 
@@ -48,8 +48,4 @@ output "config_map_aws_auth" {
 
 output "kubeconfig" {
   value = local.kubeconfig
-}
-
-output "db_endpoint" {
-  value = data.aws_db_instance.sunny_db.address
 }

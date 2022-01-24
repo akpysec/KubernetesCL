@@ -1,0 +1,7 @@
+# For myself - File names mean nothing
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-deploy
+spec:
+  replicas: 4
