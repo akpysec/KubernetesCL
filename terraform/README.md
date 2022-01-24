@@ -40,6 +40,6 @@
         terraform output kubeconfig | tail -n +2 | head -c -5 > /home/ec2-user/.kube/config
         
 
-    Now your Instance can communicate with your AWS EKS resources. If you prefer to run commands from a different instance, make sure to Install IAM Authenticator & kubectl (links provided in section 5).
+    Now your Instance can communicate with your AWS EKS resources. If you prefer to run commands from a different instance, make sure to Install IAM Authenticator & kubectl (links provided in section 4).
 
 #
