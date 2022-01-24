@@ -1,8 +1,5 @@
 # Kubernetes Cluster on EKS
 
-Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture/ARCH_2021_V01.pdf) for better understanding of an Infrastructure flow.
-#
-
 ### 🔒 Security Groups information:
     
     # EKS Cluster is hosted in 192.168.0.0/24 (Managed by AWS)
@@ -44,8 +41,5 @@ Preview [Architecture](https://github.com/akpysec/Sunny/blob/master/architecture
         
 
     Now your Instance can communicate with your AWS EKS resources. If you prefer to run commands from a different instance, make sure to Install IAM Authenticator & kubectl (links provided in section 5).
-
-### Contact:
-Contact me via <akpysec@gmail.com>.
 
 #
